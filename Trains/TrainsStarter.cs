@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Trains.Solvers;
 
 namespace Trains
 {
@@ -16,7 +12,14 @@ namespace Trains
         /// <returns>Retourne une liste de mouvements à faire pour obtenir la solution.</returns>
         public string Start(string[] trainLines, char destination)
         {
-            return "Yay!";
+            // Find a base solution with a heuristics based algorithm
+            var heuristicsSolution = HeuristicsSolver.Solve(trainLines, destination);
+
+            // Use the base solution to start a searching algorithm
+            var searchingSolution = SearchingSolver.Solve(trainLines, destination, heuristicsSolution);
+
+            // yield return good solutions as we go
+            return searchingSolution;
         }
     }
 }

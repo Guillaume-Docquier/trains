@@ -16,7 +16,7 @@ namespace Trains
         /// <returns>Retourne une liste de mouvements à faire pour obtenir la solution.</returns>
         public string Start(string[] trainLines, char destination)
         {
-            throw new NotImplementedException();
+            return "Yay!";
         }
     }
 }

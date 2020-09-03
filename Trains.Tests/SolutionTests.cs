@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Trains.models;
 
 namespace Trains.Tests
 {
@@ -8,31 +9,19 @@ namespace Trains.Tests
     public class SolutionTests
     {
         [Test]
-        [TestCase(new char[] { 'A', 'B', 'c' }, 1, 2, "ABc,1,2")]
-        public void Create_Formats_Components_With_Separator(char[] wagons, int from, int to, string expected)
+        [TestCase("ABc,1,2", "D", 2, 3, "ABc,1,2;D,2,3")]
+        public void AddMove_Formats_Moves_With_Separator(string baseSolution, string wagons, int from, int to, string expected)
         {
-            var solution = Solution.Create(wagons, from, to);
+            var move = new Move
+            {
+                Wagons = wagons,
+                From = from,
+                To = to
+            };
+
+            var solution = Solution.AddMove(baseSolution, move);
 
             Assert.AreEqual(expected, solution);
-        }
-        
-        [Test]
-        [TestCase("ABc,1,2", new char[] { 'D' }, 2, 3, "ABc,1,2;D,2,3")]
-        public void AddMove_Formats_Moves_With_Separator(string baseSolution, char[] wagons, int from, int to, string expected)
-        {
-            var solution = Solution.AddMove(baseSolution, wagons, from, to);
-
-            Assert.AreEqual(expected, solution);
-        }
-        
-        [Test]
-        [TestCase("ABc,1,3", 1 + 2)]
-        [TestCase("D,5,9", 1 + 4)]
-        public void GetMoveCost_Computes_Cost_Based_On_Components(string move, int expected)
-        {
-            var cost = Solution.GetMoveCost(move);
-
-            Assert.AreEqual(expected, cost);
         }
         
         [Test]
@@ -40,7 +29,7 @@ namespace Trains.Tests
         [TestCase("ABc,1,3;D,5,9", (1 + 2) + (1 + 4))]
         public void GetSolutionCost_Computes_Cost_Based_On_Moves(string solution, int expected)
         {
-            var cost = Solution.GetSolutionCost(solution);
+            var cost = Solution.GetCost(solution);
 
             Assert.AreEqual(expected, cost);
         }

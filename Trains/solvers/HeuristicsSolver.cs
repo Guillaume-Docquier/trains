@@ -32,7 +32,7 @@ namespace Trains.Solvers
             {
                 var trainLine = state.TrainLines[i];
                 var wagons = TrainLines.GetTrainLineWagons(trainLine);
-                while (!string.IsNullOrEmpty(wagons) && wagons[0] == state.Destination)
+                while (wagons.FirstOrDefault() == state.Destination)
                 {
                     var weight = 0;
                     var wagonsToMove = wagons

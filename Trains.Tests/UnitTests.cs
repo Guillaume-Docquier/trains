@@ -15,6 +15,7 @@ namespace Trains.Tests
         }
 
         [Test]
+        [Ignore("TrainStarter.Start doesn't terminate on purpose")]
         public void TestExampleCase1()
         {
             var test = new[] { "0000ACDGC", "0000000DG" };
@@ -25,6 +26,7 @@ namespace Trains.Tests
         }
 
         [Test]
+        [Ignore("TrainStarter.Start doesn't terminate on purpose")]
         public void TestExampleCase2()
         {
             var test = new[] { "0000AGCAG", "00DCACGDG" };

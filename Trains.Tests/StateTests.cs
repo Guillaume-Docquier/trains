@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Trains.models;
 
 namespace Trains.Tests
-{    
+{
     [TestFixture]
     public class StateTests
     {
@@ -50,75 +50,44 @@ namespace Trains.Tests
 
             Assert.AreEqual(expected, finalState);
         }
-        
-        public static IEnumerable<TestCaseData> ClearNonBlockedLinesReturnsNewStateWithUpdatedTrainLinesAndSolutionTestCases
+
+        public static IEnumerable<TestCaseData> IsDoneReturnsTrueWhenNoDestinationWagonsAreLeftTestCases
         {
             get
             {
                 yield return new TestCaseData(
                     new State
                     {
-                        TrainLines = new[] { "00ABC", "00BEF", "000AA" },
-                        Destination = 'A',
-                        Solution = ""
-                    },
-                    new State
-                    {
-                        TrainLines = new[] { "000BC", "00BEF", "00000" },
-                        Destination = 'A',
-                        Solution = "A,1,0;AA,3,0"
-                    });
-                
-                yield return new TestCaseData(
-                    new State
-                    {
-                        TrainLines = new[] { "00000", "ABDEF", "00000" },
-                        Destination = 'B',
-                        Solution = ""
-                    },
-                    new State
-                    {
-                        TrainLines = new[] { "00000", "ABDEF", "00000" },
-                        Destination = 'B',
-                        Solution = ""
-                    });
-            }
-        }
-
-        [TestCaseSource(nameof(ClearNonBlockedLinesReturnsNewStateWithUpdatedTrainLinesAndSolutionTestCases))]
-        public void ClearNonBlockedLines_Returns_New_State_With_Updated_Train_Lines_And_Solution(State startState, State expected)
-        {
-            var finalState = State.ClearNonBlockedLines(startState);
-
-            Assert.AreEqual(expected, finalState);
-        }
-        
-        public static IEnumerable<TestCaseData> ClearNonBlockedLinesRespectsLocomotiveStrengthTestCases
-        {
-            get
-            {
-                yield return new TestCaseData(
-                    new State
-                    {
-                        TrainLines = new[] { "CCCCC", "ACCEF", "000CC" },
+                        TrainLines = new[] { "ABADE", "ABBEF", "00000" },
                         Destination = 'C',
                         Solution = ""
                     },
+                    true);
+                yield return new TestCaseData(
                     new State
                     {
-                        TrainLines = new[] { "00000", "ACCEF", "00000" },
+                        TrainLines = new[] { "00000", "00000", "00000" },
                         Destination = 'C',
-                        Solution = "CCC,1,0;CC,1,0;CC,3,0"
-                    });
+                        Solution = ""
+                    },
+                    true);
+                yield return new TestCaseData(
+                    new State
+                    {
+                        TrainLines = new[] { "ABABA", "000EF", "00C00" },
+                        Destination = 'C',
+                        Solution = ""
+                    },
+                    false);
             }
         }
 
-        [TestCaseSource(nameof(ClearNonBlockedLinesRespectsLocomotiveStrengthTestCases))]
-        public void ClearNonBlockedLines_Respects_Locomotive_Strength(State startState, State expected)
+        [TestCaseSource(nameof(IsDoneReturnsTrueWhenNoDestinationWagonsAreLeftTestCases))]
+        public void IsDone_Returns_True_When_No_Destination_Wagons_Are_Left(State state, bool expected)
         {
-            var finalState = State.ClearNonBlockedLines(startState);
+            var isDone = State.IsDone(state);
 
-            Assert.AreEqual(expected, finalState);
+            Assert.AreEqual(expected, isDone);
         }
     }
 }

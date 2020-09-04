@@ -13,8 +13,7 @@ namespace Trains.models
         public int From { get; set; }
 
         public int To { get; set; }
-
-        // TODO Do I want this ?
+        
         public static Move Create(string wagons, int from, int to)
         {
             return new Move

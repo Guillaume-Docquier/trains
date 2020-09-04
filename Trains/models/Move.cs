@@ -14,6 +14,17 @@ namespace Trains.models
 
         public int To { get; set; }
 
+        // TODO Do I want this ?
+        public static Move Create(string wagons, int from, int to)
+        {
+            return new Move
+            {
+                Wagons = wagons,
+                From = from,
+                To = to
+            };
+        }
+
         public static int GetCost(Move move)
         {
             return MoveCost + Math.Abs(move.From - move.To) * DistanceCost;

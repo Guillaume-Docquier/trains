@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Trains.models
 {
@@ -46,6 +47,24 @@ namespace Trains.models
                 Destination = state.Destination,
                 Solution = models.Solution.AddMove(state.Solution, move)
             };
+        }
+
+        protected bool Equals(State other)
+        {
+            return TrainLines.SequenceEqual(other.TrainLines) && Destination == other.Destination && Solution == other.Solution;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((State) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(TrainLines, Destination, Solution);
         }
     }
 }

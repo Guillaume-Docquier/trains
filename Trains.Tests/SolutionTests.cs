@@ -9,15 +9,11 @@ namespace Trains.Tests
     public class SolutionTests
     {
         [Test]
-        [TestCase("ABc,1,2", "D", 2, 3, "ABc,1,2;D,2,3")]
-        public void AddMove_Formats_Moves_With_Separator(string baseSolution, string wagons, int from, int to, string expected)
+        [TestCase("ABc,1,2", "D,2,3", "ABc,1,2;D,2,3")]
+        [TestCase("ABc,1,2;D,2,3", "ABD,5,6", "ABc,1,2;D,2,3;ABD,5,6")]
+        public void AddMove_Formats_Moves_With_Separator(string baseSolution, string moveString, string expected)
         {
-            var move = new Move
-            {
-                Wagons = wagons,
-                From = from,
-                To = to
-            };
+            var move = Move.Parse(moveString);
 
             var solution = Solution.AddMove(baseSolution, move);
 
@@ -34,14 +30,22 @@ namespace Trains.Tests
             Assert.AreEqual(expected, cost);
         }
         
-        [Test]
-        [TestCase("ABc,1,2", new string[] { "ABc,1,2" })]
-        [TestCase("ABc,1,2;D,2,3", new string[] { "ABc,1,2", "D,2,3" })]
-        public void GetMoves_Splits_Solution_Into_Moves(string solution, string[] expected)
+        public static IEnumerable<TestCaseData> GetMovesSplitsSolutionIntoMovesTestCases
+        {
+            get
+            {
+                yield return new TestCaseData("ABc,1,2", new List<Move> { Move.Parse("ABc,1,2") });
+                yield return new TestCaseData("ABc,1,2;D,2,3", new List<Move> { Move.Parse("ABc,1,2"), Move.Parse("D,2,3") });
+                yield return new TestCaseData("ABc,1,2;D,2,3;AAA,1,0", new List<Move> { Move.Parse("ABc,1,2"), Move.Parse("D,2,3"), Move.Parse("AAA,1,0") });
+            }
+        }
+
+        [TestCaseSource(nameof(GetMovesSplitsSolutionIntoMovesTestCases))]
+        public void GetMoves_Splits_Solution_Into_Moves(string solution, List<Move> expected)
         {
             var moves = Solution.GetMoves(solution);
 
-            CollectionAssert.AreEqual(expected.ToList(), moves);
+            CollectionAssert.AreEqual(expected, moves.ToList());
         }
     }
 }

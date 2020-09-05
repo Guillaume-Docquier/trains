@@ -43,9 +43,9 @@ namespace Trains
                 var solution = new TrainsStarter().Start(trainLines, destination);
                 if (!string.IsNullOrEmpty(solution))
                 {
-                    Console.WriteLine("\nSolution found:");
+                    Console.WriteLine("\nBest solution found:");
                     Console.WriteLine(solution);
-                    Console.WriteLine($"Cost: {Solution.GetCost(solution)}");
+                    Console.WriteLine($"Moves: {Solution.GetMoves(solution).Count()}, Cost: {Solution.GetCost(solution)}");
                 }
                 else
                 {

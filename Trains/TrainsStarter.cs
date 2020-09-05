@@ -1,9 +1,14 @@
-﻿using Trains.Solvers;
+﻿using System;
+using System.Linq;
+using Trains.models;
+using Trains.Solvers;
 
 namespace Trains
 {
     public class TrainsStarter : ITrainsStarter
     {
+        private readonly TimeSpan _maxExecutionTime = TimeSpan.FromSeconds(10);
+
         /// <summary>
         /// Cette méthode sera appelée par les tests.
         /// </summary>
@@ -13,13 +18,28 @@ namespace Trains
         public string Start(string[] trainLines, char destination)
         {
             // Find a base solution with a heuristics based algorithm
-            var heuristicsSolution = HeuristicsSolver.Solve(trainLines, destination);
+            var bestSolution = HeuristicsSolver.Solve(trainLines, destination);
+            if (!string.IsNullOrEmpty(bestSolution))
+            {
+                // Use the base solution to start a searching algorithm
+                var startTime = DateTime.UtcNow;
+                foreach (var solution in SearchingSolver.Solve(trainLines, destination, bestSolution))
+                {
+                    bestSolution = solution;
 
-            // Use the base solution to start a searching algorithm
-            var searchingSolution = SearchingSolver.Solve(trainLines, destination, heuristicsSolution);
+                    var elapsed = DateTime.UtcNow - startTime;
+                    if (elapsed > this._maxExecutionTime)
+                    {
+                        break;
+                    }
 
-            // yield return good solutions as we go
-            return searchingSolution;
+                    Console.WriteLine($"\nSolution found after {elapsed} of {this._maxExecutionTime}:");
+                    Console.WriteLine(solution);
+                    Console.WriteLine($"Moves: {Solution.GetMoves(solution).Count()}, Cost: {Solution.GetCost(solution)}");
+                }
+            }
+
+            return bestSolution;
         }
     }
 }

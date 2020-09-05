@@ -1,10 +1,17 @@
-﻿namespace Trains.Solvers
+﻿using System.Collections.Generic;
+using System.Threading;
+
+namespace Trains.Solvers
 {
     public static class SearchingSolver
     {
-        public static string Solve(string[] trainLines, char destination, string bestSolution)
+        public static IEnumerable<string> Solve(string[] trainLines, char destination, string bestSolution)
         {
-            return bestSolution;
+            while (true)
+            {
+                Thread.Sleep(500);
+                yield return bestSolution;
+            }
         }
     }
 }

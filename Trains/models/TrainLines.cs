@@ -5,6 +5,7 @@ namespace Trains.models
 {
     public static class TrainLines
     {
+        public const int LocomotiveStrength = 3;
         public const int TriageLineNumber = -1;
         public const char FreeSpaceChar = '0';
 
@@ -59,13 +60,15 @@ namespace Trains.models
 
         public static string[] ApplyMove(string[] trainLines, Move move)
         {
-            trainLines[move.From] = RemoveWagonsFromTrainLine(trainLines[move.From], move.Wagons);
+            var newTrainLines = (string[])trainLines.Clone();
+
+            newTrainLines[move.From] = RemoveWagonsFromTrainLine(newTrainLines[move.From], move.Wagons);
             if (move.To != TriageLineNumber)
             {
-                trainLines[move.To] = AddWagonsToTrainLine(trainLines[move.To], move.Wagons);
+                newTrainLines[move.To] = AddWagonsToTrainLine(newTrainLines[move.To], move.Wagons);
             }
 
-            return trainLines;
+            return newTrainLines;
         }
         
         public static string RemoveWagonsFromTrainLine(string trainLine, string wagonsToRemove)
@@ -82,6 +85,25 @@ namespace Trains.models
             var remainingFreeSlots = GetTrainLineFreeSpace(trainLine).Substring(wagonsToAdd.Length);
 
             return $"{remainingFreeSlots}{wagonsToAdd}{GetTrainLineWagons(trainLine)}";
+        }
+
+        public static bool IsValidMove(string[] trainLines, char destination, Move move)
+        {
+            if (move.To == TriageLineNumber)
+            {
+                return move.Wagons.All(wagon => wagon == destination);
+            }
+
+            return GetTrainLineFreeSpace(trainLines[move.To]).Length >= move.Wagons.Length;
+        }
+
+        public static string GetMaximumMovableWagons(string trainLine)
+        {
+            var weight = 0;
+            return GetTrainLineWagons(trainLine)
+                .ToCharArray()
+                .TakeWhile(wagon => (weight += Wagon.GetWeight(wagon)) <= LocomotiveStrength)
+                .Aggregate(string.Empty, (current, wagon) => current + wagon);
         }
     }
 }

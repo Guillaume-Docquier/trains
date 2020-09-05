@@ -7,7 +7,7 @@ namespace Trains
 {
     public class TrainsStarter : ITrainsStarter
     {
-        private readonly TimeSpan _maxExecutionTime = TimeSpan.FromSeconds(10);
+        private readonly TimeSpan _maxExecutionTime = TimeSpan.FromSeconds(60);
 
         /// <summary>
         /// Cette méthode sera appelée par les tests.
@@ -19,24 +19,36 @@ namespace Trains
         {
             // Find a base solution with a heuristics based algorithm
             var bestSolution = HeuristicsSolver.Solve(trainLines, destination);
+            Console.WriteLine("\nHeuristics solution found:");
+            Console.WriteLine(bestSolution);
+            Console.WriteLine($"Moves: {Solution.GetMoves(bestSolution).Count()}, Cost: {Solution.GetCost(bestSolution)}");
+
             if (!string.IsNullOrEmpty(bestSolution))
             {
                 // Use the base solution to start a searching algorithm
+                Console.WriteLine($"\nStarting search algorithm. Max execution time: {this._maxExecutionTime}");
+                var nbSolutions = 0;
                 var startTime = DateTime.UtcNow;
                 foreach (var solution in SearchingSolver.Solve(trainLines, destination, bestSolution))
                 {
-                    bestSolution = solution;
-
+                    nbSolutions++;
                     var elapsed = DateTime.UtcNow - startTime;
+                    if (!string.IsNullOrEmpty(solution))
+                    {
+                        bestSolution = solution;
+
+                        Console.WriteLine($"\nBetter solution found after {elapsed}:");
+                        Console.WriteLine(bestSolution);
+                        Console.WriteLine($"Moves: {Solution.GetMoves(bestSolution).Count()}, Cost: {Solution.GetCost(bestSolution)}");
+                    }
+
                     if (elapsed > this._maxExecutionTime)
                     {
                         break;
                     }
-
-                    Console.WriteLine($"\nSolution found after {elapsed} of {this._maxExecutionTime}:");
-                    Console.WriteLine(solution);
-                    Console.WriteLine($"Moves: {Solution.GetMoves(solution).Count()}, Cost: {Solution.GetCost(solution)}");
                 }
+
+                Console.WriteLine($"\nSearch algorithm explored {nbSolutions} solutions in {DateTime.UtcNow - startTime}");
             }
 
             return bestSolution;

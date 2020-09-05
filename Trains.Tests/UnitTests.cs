@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Trains.models;
 
 namespace Trains.Tests
 {
@@ -15,23 +16,16 @@ namespace Trains.Tests
         }
 
         [Test]
-        public void TestExampleCase1()
+        [TestCase(new[] { "0000ACDGC", "0000000DG" }, 'C', "A,1,2;C,1,0;DG,1,2;C,1,0")]
+        [TestCase(new[] { "0000AGCAG", "00DCACGDG" }, 'C', "AG,1,2;C,1,0;AGD,2,1;C,2,0;A,2,1;C,2,0")]
+        public void TestExampleCase1(string[] trainLines, char destination, string expected)
         {
-            var test = new[] { "0000ACDGC", "0000000DG" };
+            var solution = this._trainStarter.Start(trainLines, destination);
 
-            var result = this._trainStarter.Start(test, 'C');
+            var cost = Solution.GetCost(solution);
+            var expectedCost = Solution.GetCost(expected);
 
-            Assert.AreEqual("A,1,2;C,1,0;DG,1,2;C,1,0", result);
-        }
-
-        [Test]
-        public void TestExampleCase2()
-        {
-            var test = new[] { "0000AGCAG", "00DCACGDG" };
-
-            var result = this._trainStarter.Start(test, 'C');
-
-            Assert.AreEqual("AG,1,2;C,1,0;AGD,2,1;C,2,0;A,2,1;C,2,0", result);
+            Assert.LessOrEqual(cost, expectedCost);
         }
     }   
 }

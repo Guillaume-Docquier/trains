@@ -5,7 +5,6 @@ namespace Trains.models
 {
     public class State
     {
-        public const int LocomotiveStrength = 3;
         public string[] TrainLines { get; set; }
 
         public char Destination { get; set; }
@@ -26,7 +25,7 @@ namespace Trains.models
         {
             return state.TrainLines.All(trainLine => models.TrainLines.IsDone(trainLine, state.Destination));
         }
-        
+
         protected bool Equals(State other)
         {
             return TrainLines.SequenceEqual(other.TrainLines) && Destination == other.Destination && Solution == other.Solution;

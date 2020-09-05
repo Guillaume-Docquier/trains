@@ -36,7 +36,7 @@ namespace Trains.Solvers
                     var weight = 0;
                     var wagonsToMove = wagons
                         .TakeWhile(wagon => wagon == state.Destination)
-                        .TakeWhile(wagon => (weight += Wagon.GetWeight(wagon)) <= State.LocomotiveStrength)
+                        .TakeWhile(wagon => (weight += Wagon.GetWeight(wagon)) <= TrainLines.LocomotiveStrength)
                         .Aggregate(string.Empty, (current, wagon) => current + wagon);
 
                     if (!string.IsNullOrEmpty(wagonsToMove))
@@ -132,7 +132,7 @@ namespace Trains.Solvers
                 var weight = 0;
                 var wagonsToMove = wagons
                     .TakeWhile(wagon => wagon != state.Destination)
-                    .TakeWhile(wagon => (weight += Wagon.GetWeight(wagon)) <= State.LocomotiveStrength)
+                    .TakeWhile(wagon => (weight += Wagon.GetWeight(wagon)) <= TrainLines.LocomotiveStrength)
                     .ToList();
 
                 if (!wagonsToMove.Any())

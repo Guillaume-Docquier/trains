@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Trains.models;
 
 namespace Trains
 {
@@ -40,8 +41,16 @@ namespace Trains
                 var destination = Console.ReadLine()!.ToUpper().First();
 
                 var solution = new TrainsStarter().Start(trainLines, destination);
-                Console.WriteLine("\nSolution found:");
-                Console.WriteLine(solution);
+                if (!string.IsNullOrEmpty(solution))
+                {
+                    Console.WriteLine("\nSolution found:");
+                    Console.WriteLine(solution);
+                    Console.WriteLine($"Cost: {Solution.GetCost(solution)}");
+                }
+                else
+                {
+                    Console.WriteLine("\nNo solution found...");
+                }
             }
         }
     }

@@ -75,5 +75,51 @@ namespace Trains.Tests
 
             Assert.AreEqual(expected, newTrainLines);
         }
+        
+        [Test]
+        [TestCase("00000", 'C', true)]
+        [TestCase("0000A", 'C', true)]
+        [TestCase("000AB", 'C', true)]
+        [TestCase("0000C", 'C', false)]
+        [TestCase("000AC", 'C', false)]
+        [TestCase("00BCA", 'C', false)]
+        public void IsDone_Returns_True_When_No_Destination_Wagons(string trainLine, char destination, bool expected)
+        {
+            var isDone = TrainLines.IsDone(trainLine, destination);
+
+            Assert.AreEqual(expected, isDone);
+        }
+
+        [Test]
+        [TestCase("00000", 'C', 0)]
+        [TestCase("0000A", 'C', 0)]
+        [TestCase("000AB", 'C', 0)]
+        [TestCase("0000C", 'C', 0)]
+        [TestCase("000AC", 'C', 1)]
+        [TestCase("00BCA", 'C', 1)]
+        [TestCase("ABCCA", 'C', 2)]
+        [TestCase("ACBCA", 'C', 1)]
+        public void GetNumberOfWagonsToMoveToUnblockTheLine_Return_The_Number_Of_Wagons_Before_The_First_Destination_Wagon(string trainLine, char destination, int expected)
+        {
+            var numberOfWagonsToMove = TrainLines.GetNumberOfWagonsToMoveToUnblockTheLine(trainLine, destination);
+
+            Assert.AreEqual(expected, numberOfWagonsToMove);
+        }
+        
+        [Test]
+        [TestCase("00000", 'C', 0)]
+        [TestCase("0000A", 'C', 0)]
+        [TestCase("000AB", 'C', 0)]
+        [TestCase("0000C", 'C', 0)]
+        [TestCase("000AC", 'C', 1)]
+        [TestCase("00BCA", 'C', 1)]
+        [TestCase("ABCCA", 'C', 2)]
+        [TestCase("ACBCA", 'C', 2)]
+        public void GetNumberOfWagonsToMoveToFreeTheLine_Return_The_Number_Of_Wagons_Before_The_First_Destination_Wagon(string trainLine, char destination, int expected)
+        {
+            var numberOfWagonsToMove = TrainLines.GetNumberOfWagonsToMoveToFreeTheLine(trainLine, destination);
+
+            Assert.AreEqual(expected, numberOfWagonsToMove);
+        }
     }
 }

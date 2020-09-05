@@ -24,7 +24,7 @@ namespace Trains.models
 
         public static bool IsDone(State state)
         {
-            return state.TrainLines.All(trainLine => !trainLine.Contains(state.Destination));
+            return state.TrainLines.All(trainLine => models.TrainLines.IsDone(trainLine, state.Destination));
         }
         
         protected bool Equals(State other)

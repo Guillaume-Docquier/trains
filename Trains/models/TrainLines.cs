@@ -21,9 +21,7 @@ namespace Trains.models
         
         public static string GetTrainLineFreeSpace(string trainLine)
         {
-            return trainLine
-                .TakeWhile(wagon => wagon == FreeSpaceChar)
-                .Aggregate(string.Empty, (current, wagon) => current + wagon);
+            return new string(trainLine.TakeWhile(wagon => wagon == FreeSpaceChar).ToArray());
         }
 
         public static int GetNumberOfWagonsToMoveToFreeTheLine(string trainLine, char destination)

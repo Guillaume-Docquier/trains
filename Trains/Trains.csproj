@@ -6,6 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="samples\c-impossible.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
       <None Remove="samples\easy-01.txt" />
       <EmbeddedResource Include="samples\c-scope-bm.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

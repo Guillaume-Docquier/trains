@@ -13,11 +13,12 @@ namespace Trains.Tests
         [TestCase("ABc,1,2;D,2,3", "ABD,5,6", "ABc,1,2;D,2,3;ABD,5,6")]
         public void AddMove_Formats_Moves_With_Separator(string baseSolution, string moveString, string expected)
         {
+            var solution = new Solution(baseSolution);
+
             var move = Move.Parse(moveString);
+            solution.AddMove(move);
 
-            var solution = Solution.AddMove(baseSolution, move);
-
-            Assert.AreEqual(expected, solution);
+            Assert.AreEqual(expected, solution.SolutionString);
         }
         
         [Test]

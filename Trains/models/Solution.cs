@@ -47,16 +47,7 @@ namespace Trains.models
             };
         }
 
-        public static string AddMove(string solution, Move move)
-        {
-            if (string.IsNullOrEmpty(solution))
-            {
-                return move.ToString();
-            }
-
-            return $"{solution}{MoveSeparator}{move}";
-        }
-
+        // You shouldn't use this if you're going to do it a lot, instantiate a Solution instead.
         public static int GetCost(string solution)
         {
             if (string.IsNullOrEmpty(solution))
@@ -71,6 +62,7 @@ namespace Trains.models
         {
             return solution.Split(MoveSeparator).Select(Move.Parse);
         }
+
         protected bool Equals(Solution other)
         {
             return Cost == other.Cost && SolutionString == other.SolutionString;

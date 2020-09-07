@@ -4,9 +4,9 @@ namespace Trains.models
 {
     public class Move
     {
-        public const char MoveComponentsSeparator = ',';
         public const int MoveCost = 1;
         public const int DistanceCost = 1;
+        private const char MoveComponentsSeparator = ',';
 
         public string Wagons { get; set; }
         

@@ -13,14 +13,14 @@ namespace Trains.models
 
         public static State ApplyMove(State state, Move move)
         {
-            var solution = state.Solution.Clone();
-            solution.AddMove(move);
+            var newSolution = state.Solution.Clone();
+            newSolution.AddMove(move);
 
             return new State
             {
                 TrainLines = models.TrainLines.ApplyMove(state.TrainLines, move),
                 Destination = state.Destination,
-                Solution = solution
+                Solution = newSolution
             };
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Trains.models;
 
 namespace Trains.Solvers
@@ -36,10 +35,10 @@ namespace Trains.Solvers
                 var wagons = TrainLines.GetTrainLineWagons(trainLine);
                 while (wagons.FirstOrDefault() == state.Destination)
                 {
-                    var weight = 0;
+                    var nbWagons = 0;
                     var wagonsToMove = wagons
                         .TakeWhile(wagon => wagon == state.Destination)
-                        .TakeWhile(wagon => (weight += Wagon.GetWeight(wagon)) <= TrainLines.LocomotiveStrength)
+                        .TakeWhile(wagon => (nbWagons += 1) <= TrainLines.LocomotiveStrength)
                         .Aggregate(string.Empty, (current, wagon) => current + wagon);
 
                     if (!string.IsNullOrEmpty(wagonsToMove))
@@ -132,10 +131,10 @@ namespace Trains.Solvers
             var wagons = TrainLines.GetTrainLineWagons(trainLine);
             while (wagons.FirstOrDefault() != state.Destination)
             {
-                var weight = 0;
+                var nbWagons = 0;
                 var wagonsToMove = wagons
                     .TakeWhile(wagon => wagon != state.Destination)
-                    .TakeWhile(wagon => (weight += Wagon.GetWeight(wagon)) <= TrainLines.LocomotiveStrength)
+                    .TakeWhile(wagon => (nbWagons += 1) <= TrainLines.LocomotiveStrength)
                     .ToList();
 
                 if (!wagonsToMove.Any())
@@ -158,7 +157,7 @@ namespace Trains.Solvers
 
                 var (toTrainLine, toTrainLineIndex) = linesOrderedByFreeSpace.First();
                 var maxFreeSpace = TrainLines.GetTrainLineFreeSpace(toTrainLine).Length;
-                var nbWagons = 0;
+                nbWagons = 0;
                 var wagonsToMoveString = wagonsToMove
                     .TakeWhile(wagon => (nbWagons += 1) <= maxFreeSpace)
                     .Aggregate(string.Empty, (current, wagon) => current + wagon);

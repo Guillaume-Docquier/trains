@@ -10,6 +10,19 @@ namespace Trains.models
         private const char FreeSpaceChar = '0';
         private static readonly string FreeSpaceString = FreeSpaceChar.ToString();
 
+        public static string[] ApplyMove(string[] trainLines, Move move)
+        {
+            var newTrainLines = (string[])trainLines.Clone();
+
+            newTrainLines[move.From] = RemoveWagonsFromTrainLine(newTrainLines[move.From], move.Wagons);
+            if (move.To != TriageLineNumber)
+            {
+                newTrainLines[move.To] = AddWagonsToTrainLine(newTrainLines[move.To], move.Wagons);
+            }
+
+            return newTrainLines;
+        }
+
         public static bool IsDone(string trainLine, char destination)
         {
             return !trainLine.Contains(destination);
@@ -56,19 +69,6 @@ namespace Trains.models
 
             return 0;
         }
-
-        public static string[] ApplyMove(string[] trainLines, Move move)
-        {
-            var newTrainLines = (string[])trainLines.Clone();
-
-            newTrainLines[move.From] = RemoveWagonsFromTrainLine(newTrainLines[move.From], move.Wagons);
-            if (move.To != TriageLineNumber)
-            {
-                newTrainLines[move.To] = AddWagonsToTrainLine(newTrainLines[move.To], move.Wagons);
-            }
-
-            return newTrainLines;
-        }
         
         public static string RemoveWagonsFromTrainLine(string trainLine, string wagonsToRemove)
         {
@@ -98,10 +98,10 @@ namespace Trains.models
 
         public static string GetMaximumMovableWagons(string trainLine)
         {
-            var weight = 0;
+            var nbWagons = 0;
             return GetTrainLineWagons(trainLine)
                 .ToCharArray()
-                .TakeWhile(wagon => (weight += Wagon.GetWeight(wagon)) <= LocomotiveStrength)
+                .TakeWhile(wagon => (nbWagons += 1) <= LocomotiveStrength)
                 .Aggregate(string.Empty, (current, wagon) => current + wagon);
         }
     }

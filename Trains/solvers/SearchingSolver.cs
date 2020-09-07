@@ -17,17 +17,16 @@ namespace Trains.Solvers
             this._visitedStates = new Dictionary<string, int>();
         }
 
-        // Returns true if it's the best cost for this state we've seen so far
-        private bool TryStoreVisitedState(string[] trainLines, int cost)
+        public static IEnumerable<Solution> Solve(string[] trainLines, char destination, string bestSolution)
         {
-            var stateKey = string.Join("", trainLines);
-            if(this._visitedStates.TryGetValue(stateKey, out var bestCost) && cost >= bestCost)
+            var state = new State
             {
-                return false;
-            }
-
-            this._visitedStates[stateKey] = cost;
-            return true;
+                TrainLines = trainLines,
+                Destination = destination,
+                Solution = new Solution(""),
+            };
+            
+            return new SearchingSolver(bestSolution).Solve(state, GetAllUsefulMoves(state), true);
         }
 
         private IEnumerable<Solution> Solve(State state, List<Move> moves, bool logProgress = false)
@@ -144,18 +143,6 @@ namespace Trains.Solvers
             return strResult.ToString();
         }
 
-        public static IEnumerable<Solution> Solve(string[] trainLines, char destination, string bestSolution)
-        {
-            var state = new State
-            {
-                TrainLines = trainLines,
-                Destination = destination,
-                Solution = new Solution(""),
-            };
-            
-            return new SearchingSolver(bestSolution).Solve(state, GetAllUsefulMoves(state), true);
-        }
-
         public static List<Move> GetAllUsefulMoves(State state)
         {
             // For each trainLine
@@ -193,6 +180,19 @@ namespace Trains.Solvers
             // moves.Shuffle();
 
             return moves;
+        }
+
+        // Returns true if it's the best cost for this state we've seen so far
+        private bool TryStoreVisitedState(string[] trainLines, int cost)
+        {
+            var stateKey = string.Join("", trainLines);
+            if(this._visitedStates.TryGetValue(stateKey, out var bestCost) && cost >= bestCost)
+            {
+                return false;
+            }
+
+            this._visitedStates[stateKey] = cost;
+            return true;
         }
     }
 }

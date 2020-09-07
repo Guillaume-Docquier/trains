@@ -1,18 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Trains.models;
 
 namespace Trains.Solvers
 {
     public class SearchingSolver
     {
-        public string BestSolution;
-        public int BestSolutionCost;
+        private string _bestSolution;
+        private int _bestSolutionCost;
+        private Dictionary<string, int> _visitedStates;
 
         public SearchingSolver(string bestSolution)
         {
-            this.BestSolution = bestSolution;
-            this.BestSolutionCost = Solution.GetCost(bestSolution);
+            this._bestSolution = bestSolution;
+            this._bestSolutionCost = Solution.GetCost(bestSolution);
+            this._visitedStates = new Dictionary<string, int>();
+        }
+
+        private static string GetTrainLinesString(string[] trainLines)
+        {
+            return trainLines.Aggregate(string.Empty, (current, trainLine) => current + trainLine);
+        }
+
+        // Returns true if it's the best cost for this state we've seen so far
+        private bool TryStoreVisitedState(string[] trainLines, int cost)
+        {
+            var stateKey = GetTrainLinesString(trainLines);
+            if(this._visitedStates.TryGetValue(stateKey, out var bestCost) && cost >= bestCost)
+            {
+                return false;
+            }
+
+            this._visitedStates[stateKey] = cost;
+            return true;
+        }
+
+        private IEnumerable<string> Solve(State state, List<Move> moves)
+        {
+            foreach (var move in moves)
+            {
+                var newState = State.ApplyMove(state, move);
+                var newCost = Solution.GetCost(newState.Solution);
+                if (!this.TryStoreVisitedState(newState.TrainLines, newCost) || newCost >= this._bestSolutionCost)
+                {
+                    yield return string.Empty;
+                }
+                else if (State.IsDone(newState) && newCost < this._bestSolutionCost)
+                {
+                    this._bestSolution = newState.Solution;
+                    this._bestSolutionCost = newCost;
+
+                    yield return this._bestSolution;
+                }
+                else
+                {
+                    foreach (var solution in Solve(newState, GetAllPossibleMoves(newState)))
+                    {
+                        yield return solution;
+                    }
+                }
+            }
         }
 
         public static IEnumerable<string> Solve(string[] trainLines, char destination, string bestSolution)
@@ -25,33 +73,6 @@ namespace Trains.Solvers
             };
             
             return new SearchingSolver(bestSolution).Solve(state, GetAllPossibleMoves(state));
-        }
-        
-        public IEnumerable<string> Solve(State state, List<Move> moves)
-        {
-            foreach (var move in moves)
-            {
-                var newState = State.ApplyMove(state, move);
-                var newCost = Solution.GetCost(newState.Solution);
-                if (State.IsDone(newState) && newCost < this.BestSolutionCost)
-                {
-                    this.BestSolution = newState.Solution;
-                    this.BestSolutionCost = newCost;
-
-                    yield return this.BestSolution;
-                }
-                else if (newCost >= this.BestSolutionCost)
-                {
-                    yield return string.Empty;
-                }
-                else
-                {
-                    foreach (var solution in Solve(newState, GetAllPossibleMoves(newState)))
-                    {
-                        yield return solution;
-                    }
-                }
-            }
         }
 
         public static List<Move> GetAllPossibleMoves(State state)
@@ -79,7 +100,6 @@ namespace Trains.Solvers
                 }
             }
 
-            // TODO Handle cycles to speed up the search
             return moves;
         }
     }

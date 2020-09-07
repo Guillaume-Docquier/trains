@@ -71,7 +71,7 @@ namespace Trains.Solvers
                 estimatedAdditionalCost += wagonsToMoveCost + groupsOfDestinationWagonsToMove;
             }
 
-            return state.Solution.Cost + estimatedAdditionalCost < maxCost;
+            return state.Solution.Cost + estimatedAdditionalCost * (Move.MoveCost + Move.DistanceCost) < maxCost;
         }
 
         // Apparently Math.Ceiling is very slow

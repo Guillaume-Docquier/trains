@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Trains.models;
 
 namespace Trains.Solvers
@@ -39,7 +41,9 @@ namespace Trains.Solvers
             {
                 var newState = State.ApplyMove(state, move);
                 var newCost = newState.Solution.Cost;
-                if (newCost >= this._bestSolution.Cost || !this.TryStoreVisitedState(newState.TrainLines, newCost))
+                if (newCost >= this._bestSolution.Cost ||
+                    !this.TryStoreVisitedState(newState.TrainLines, newCost) ||
+                    !HasPotential(newState, this._bestSolution.Cost))
                 {
                     yield return Solution.NoSolution;
                 }
@@ -57,6 +61,45 @@ namespace Trains.Solvers
                     }
                 }
             }
+        }
+
+        public static bool HasPotential(State state, int maxCost)
+        {
+            var estimatedAdditionalCost = 0;
+            foreach (var trainLine in state.TrainLines)
+            {
+                var wagonsToMove = TrainLines.GetNumberOfWagonsToMoveToFreeTheLine(trainLine, state.Destination);
+                var wagonsToMoveCost = FastCeiling((double)wagonsToMove / TrainLines.LocomotiveStrength);
+
+                var groupsOfDestinationWagonsToMove = RemoveConsecutiveDuplicates(trainLine).Count(wagon => wagon == state.Destination);
+                
+                estimatedAdditionalCost += wagonsToMoveCost + groupsOfDestinationWagonsToMove;
+            }
+
+            return state.Solution.Cost + estimatedAdditionalCost < maxCost;
+        }
+
+        // Apparently Math.Ceiling is very slow
+        // https://stackoverflow.com/a/53520604
+        // https://www.codeproject.com/Tips/700780/Fast-floor-ceiling-functions
+        public static int FastCeiling(double number)
+        {
+            var rounded = (int)number;
+            return rounded < number ? rounded + 1 : rounded;
+        }
+
+        public static string RemoveConsecutiveDuplicates(string trainLine)
+        {
+            var strResult = new StringBuilder();
+            foreach (var element in trainLine.ToCharArray())
+            {
+                if (strResult.Length == 0 || strResult[^1] != element)
+                {
+                    strResult.Append(element);
+                }
+            }
+            
+            return strResult.ToString();
         }
 
         public static IEnumerable<Solution> Solve(string[] trainLines, char destination, string bestSolution)

@@ -7,7 +7,8 @@ namespace Trains.models
     {
         public const int LocomotiveStrength = 3;
         public const int TriageLineNumber = -1;
-        public const char FreeSpaceChar = '0';
+        private const char FreeSpaceChar = '0';
+        private static readonly string FreeSpaceString = FreeSpaceChar.ToString();
 
         public static bool IsDone(string trainLine, char destination)
         {
@@ -16,7 +17,7 @@ namespace Trains.models
 
         public static string GetTrainLineWagons(string trainLine)
         {
-            return trainLine.Replace(FreeSpaceChar.ToString(), "");
+            return trainLine.Replace(FreeSpaceString, "");
         }
         
         public static string GetTrainLineFreeSpace(string trainLine)

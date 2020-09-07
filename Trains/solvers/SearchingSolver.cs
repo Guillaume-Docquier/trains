@@ -50,7 +50,7 @@ namespace Trains.Solvers
                 }
                 else
                 {
-                    foreach (var solution in Solve(newState, GetAllPossibleMoves(newState)))
+                    foreach (var solution in Solve(newState, GetAllUsefulMoves(newState)))
                     {
                         yield return solution;
                     }
@@ -141,17 +141,23 @@ namespace Trains.Solvers
                 Solution = new Solution(""),
             };
             
-            return new SearchingSolver(bestSolution).Solve(state, GetAllPossibleMoves(state));
+            return new SearchingSolver(bestSolution).Solve(state, GetAllUsefulMoves(state));
         }
 
-        public static List<Move> GetAllPossibleMoves(State state)
+        public static List<Move> GetAllUsefulMoves(State state)
         {
             // For each trainLine
             // Move 1 to max wagons to every other line
             var moves = new List<Move>();
             for (var originTrainLineIndex = 0; originTrainLineIndex < state.TrainLines.Length; originTrainLineIndex++)
             {
-                var maxWagonsToMove = TrainLines.GetMaximumMovableWagons(state.TrainLines[originTrainLineIndex]);
+                var trainLine = state.TrainLines[originTrainLineIndex];
+                if (TrainLines.IsDone(trainLine, state.Destination))
+                {
+                    continue;
+                }
+
+                var maxWagonsToMove = TrainLines.GetMaximumMovableWagons(trainLine);
                 for (var numberOfWagonsToMove = 1; numberOfWagonsToMove <= maxWagonsToMove.Length; numberOfWagonsToMove++)
                 {
                     var wagonsToMove = maxWagonsToMove.Substring(0, numberOfWagonsToMove);

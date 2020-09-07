@@ -7,7 +7,7 @@ namespace Trains
 {
     public class TrainsStarter : ITrainsStarter
     {
-        private readonly TimeSpan _maxExecutionTime = TimeSpan.FromSeconds(60);
+        private readonly TimeSpan _maxExecutionTime = TimeSpan.FromSeconds(600);
 
         /// <summary>
         /// Cette méthode sera appelée par les tests.

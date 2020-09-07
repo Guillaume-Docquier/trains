@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Trains.models;
@@ -38,6 +39,35 @@ namespace Trains.Tests
             var searchingSolution = SearchingSolver.Solve(trainLines, destination, heuristicsSolution).Last(solution => !string.IsNullOrEmpty(solution.SolutionString));
 
             Assert.Less(Solution.GetCost(searchingSolution.SolutionString), Solution.GetCost(heuristicsSolution));
+        }
+
+        [Test]
+        public void Cost_Calculator()
+        {
+            var moves = new List<Move>
+            {
+                Move.Parse("A,2,0"),
+                Move.Parse("CC,2,1"),
+                Move.Parse("A,2,0"),
+                Move.Parse("CDG,3,2"),
+                Move.Parse("A,3,0"),
+                Move.Parse("DG,3,2"),
+                Move.Parse("A,3,0"),
+                Move.Parse("DGD,4,3"),
+                Move.Parse("G,4,3"),
+                Move.Parse("A,4,0"),
+                Move.Parse("AA,5,0"),
+                Move.Parse("DG,5,4"),
+                Move.Parse("A,5,0"),
+                Move.Parse("A,6,0")
+            };
+            
+            var solution = new Solution("");
+
+            foreach (var move in moves)
+            {
+                solution.AddMove(move);
+            }
         }
     }   
 }

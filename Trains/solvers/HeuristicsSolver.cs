@@ -12,17 +12,20 @@ namespace Trains.Solvers
             {
                 TrainLines = trainLines,
                 Destination = destination,
-                Solution = string.Empty,
+                Solution = new Solution(""),
             };
 
             state = ClearNonBlockedLines(state);
             while (state != null && !State.IsDone(state))
             {
                 state = UnblockEasiestLine(state);
-                state = ClearNonBlockedLines(state);
+                if (state != null)
+                {
+                    state = ClearNonBlockedLines(state);
+                }
             }
 
-            return state?.Solution ?? string.Empty;
+            return state?.Solution.SolutionString ?? string.Empty;
         }
 
         public static State ClearNonBlockedLines(State state)

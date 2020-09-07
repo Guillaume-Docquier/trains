@@ -33,9 +33,9 @@ namespace Trains
                 {
                     nbSolutions++;
                     var elapsed = DateTime.UtcNow - startTime;
-                    if (!string.IsNullOrEmpty(solution))
+                    if (!string.IsNullOrEmpty(solution.SolutionString))
                     {
-                        bestSolution = solution;
+                        bestSolution = solution.SolutionString;
 
                         Console.WriteLine($"\nBetter solution found after {elapsed}:");
                         Console.WriteLine(bestSolution);

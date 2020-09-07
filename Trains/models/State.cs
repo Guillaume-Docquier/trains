@@ -9,15 +9,18 @@ namespace Trains.models
 
         public char Destination { get; set; }
 
-        public string Solution { get; set; }
+        public Solution Solution { get; set; }
 
         public static State ApplyMove(State state, Move move)
         {
+            var solution = state.Solution.Clone();
+            solution.AddMove(move);
+
             return new State
             {
                 TrainLines = models.TrainLines.ApplyMove(state.TrainLines, move),
                 Destination = state.Destination,
-                Solution = models.Solution.AddMove(state.Solution, move)
+                Solution = solution
             };
         }
 
@@ -28,7 +31,7 @@ namespace Trains.models
 
         protected bool Equals(State other)
         {
-            return TrainLines.SequenceEqual(other.TrainLines) && Destination == other.Destination && Solution == other.Solution;
+            return TrainLines.SequenceEqual(other.TrainLines) && Destination == other.Destination && Equals(Solution, other.Solution);
         }
 
         public override bool Equals(object obj)

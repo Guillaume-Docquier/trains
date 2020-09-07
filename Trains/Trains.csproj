@@ -7,11 +7,14 @@
 
     <ItemGroup>
       <None Remove="samples\easy-01.txt" />
+      <EmbeddedResource Include="samples\c-short-benchmark.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
       <EmbeddedResource Include="samples\easy-01.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="samples\hard-01.txt" />
-      <EmbeddedResource Include="samples\easy-02.txt">
+      <EmbeddedResource Include="samples\c-long-benchmark.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
       <EmbeddedResource Include="samples\hard-01.txt">

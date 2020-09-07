@@ -16,14 +16,14 @@ namespace Trains.Tests
                     {
                         TrainLines = new[] { "00ABC", "00DEF", "00000" },
                         Destination = 'C',
-                        Solution = "DE,1,2"
+                        Solution = new Solution("DE,1,2")
                     },
                     Move.Parse("AB,1,2"),
                     new State
                     {
                         TrainLines = new[] { "0000C", "ABDEF", "00000" },
                         Destination = 'C',
-                        Solution = "DE,1,2;AB,1,2"
+                        Solution = new Solution("DE,1,2;AB,1,2")
                     });
                 
                 yield return new TestCaseData(
@@ -31,14 +31,14 @@ namespace Trains.Tests
                     {
                         TrainLines = new[] { "0000C", "ABDEF", "00000" },
                         Destination = 'C',
-                        Solution = "DE,1,2;AB,1,2"
+                        Solution = new Solution("DE,1,2;AB,1,2")
                     },
                     Move.Parse("C,1,0"),
                     new State
                     {
                         TrainLines = new[] { "00000", "ABDEF", "00000" },
                         Destination = 'C',
-                        Solution = "DE,1,2;AB,1,2;C,1,0"
+                        Solution = new Solution("DE,1,2;AB,1,2;C,1,0")
                     });
             }
         }
@@ -60,7 +60,7 @@ namespace Trains.Tests
                     {
                         TrainLines = new[] { "ABADE", "ABBEF", "00000" },
                         Destination = 'C',
-                        Solution = ""
+                        Solution = new Solution("")
                     },
                     true);
                 yield return new TestCaseData(
@@ -68,7 +68,7 @@ namespace Trains.Tests
                     {
                         TrainLines = new[] { "00000", "00000", "00000" },
                         Destination = 'C',
-                        Solution = ""
+                        Solution = new Solution("")
                     },
                     true);
                 yield return new TestCaseData(
@@ -76,7 +76,7 @@ namespace Trains.Tests
                     {
                         TrainLines = new[] { "ABABA", "000EF", "00C00" },
                         Destination = 'C',
-                        Solution = ""
+                        Solution = new Solution("")
                     },
                     false);
             }

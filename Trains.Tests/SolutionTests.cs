@@ -47,5 +47,15 @@ namespace Trains.Tests
 
             CollectionAssert.AreEqual(expected, moves.ToList());
         }
+        
+        [Test]
+        [TestCase("", 0)]
+        [TestCase("AB,1,2;DC,2,4", 2 + 3)]
+        public void GetCost_Returns_The_Sum_Of_The_Cost_Of_The_Moves_In_The_Solution(string solution, int expected)
+        {
+            var cost = Solution.GetCost(solution);
+            
+            Assert.AreEqual(expected, cost);
+        }
     }
 }

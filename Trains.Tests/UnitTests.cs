@@ -35,9 +35,9 @@ namespace Trains.Tests
         public void SearchingSolver_Can_Find_Better_Solutions_Than_HeuristicsSolver(string[] trainLines, char destination)
         {
             var heuristicsSolution = HeuristicsSolver.Solve(trainLines, destination);
-            var searchingSolution = SearchingSolver.Solve(trainLines, destination, heuristicsSolution).Last(solution => !string.IsNullOrEmpty(solution));
+            var searchingSolution = SearchingSolver.Solve(trainLines, destination, heuristicsSolution).Last(solution => !string.IsNullOrEmpty(solution.SolutionString));
 
-            Assert.Less(Solution.GetCost(searchingSolution), Solution.GetCost(heuristicsSolution));
+            Assert.Less(Solution.GetCost(searchingSolution.SolutionString), Solution.GetCost(heuristicsSolution));
         }
     }   
 }

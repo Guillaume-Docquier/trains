@@ -9,7 +9,7 @@ namespace Trains.Tests
         [Test]
         [TestCase("ABc", 1, 3, 1 + 2)]
         [TestCase("D", 5, 9, 1 + 4)]
-        public void GetMoveCost_Computes_Cost_Based_On_Components(string wagons, int from, int to, int expected)
+        public void GetCost_Computes_Cost_Based_On_Components(string wagons, int from, int to, int expected)
         {
             var move = new Move
             {

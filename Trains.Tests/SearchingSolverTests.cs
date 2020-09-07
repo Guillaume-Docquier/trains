@@ -17,7 +17,7 @@ namespace Trains.Tests
                     {
                         TrainLines = new[] {"0AAAA", "0BBBB", "0CCCC"},
                         Destination = 'D',
-                        Solution = ""
+                        Solution = new Solution("")
                     },
                     new List<Move>
                     {
@@ -33,7 +33,7 @@ namespace Trains.Tests
                     {
                         TrainLines = new[] {"00000", "00000", "00000"},
                         Destination = 'D',
-                        Solution = ""
+                        Solution = new Solution("")
                     },
                     new List<Move>());
                 yield return new TestCaseData(
@@ -41,7 +41,7 @@ namespace Trains.Tests
                     {
                         TrainLines = new[] {"AAAAA", "00BBB", "00000"},
                         Destination = 'A',
-                        Solution = ""
+                        Solution = new Solution("")
                     },
                     new List<Move>
                     {

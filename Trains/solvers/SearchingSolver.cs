@@ -17,15 +17,10 @@ namespace Trains.Solvers
             this._visitedStates = new Dictionary<string, int>();
         }
 
-        private static string GetTrainLinesString(string[] trainLines)
-        {
-            return string.Join("", trainLines);
-        }
-
         // Returns true if it's the best cost for this state we've seen so far
         private bool TryStoreVisitedState(string[] trainLines, int cost)
         {
-            var stateKey = GetTrainLinesString(trainLines);
+            var stateKey = string.Join("", trainLines);
             if(this._visitedStates.TryGetValue(stateKey, out var bestCost) && cost >= bestCost)
             {
                 return false;

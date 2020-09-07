@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Trains.ExtensionMethods;
 using Trains.models;
 
 namespace Trains.Solvers
@@ -99,6 +100,10 @@ namespace Trains.Solvers
                     }
                 }
             }
+
+            // Shuffling the moves doesn't seem to improve the performance of the algorithm
+            // I'm not sure if it's because of my test example or if it is applicable to every problem
+            // moves.Shuffle();
 
             return moves;
         }

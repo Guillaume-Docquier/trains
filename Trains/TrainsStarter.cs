@@ -7,7 +7,7 @@ namespace Trains
 {
     public class TrainsStarter : ITrainsStarter
     {
-        private readonly TimeSpan _maxExecutionTime = TimeSpan.FromSeconds(600);
+        private readonly TimeSpan _maxExecutionTime = TimeSpan.FromMinutes(47);
 
         /// <summary>
         /// Cette méthode sera appelée par les tests.
@@ -26,8 +26,8 @@ namespace Trains
             if (!string.IsNullOrEmpty(bestSolution))
             {
                 // Use the base solution to start a searching algorithm
-                Console.WriteLine($"\nStarting search algorithm. Max execution time: {this._maxExecutionTime}");
-                var nbSolutions = 0;
+                Console.WriteLine($"\n[{DateTime.Now}] Starting search algorithm. Max execution time: {this._maxExecutionTime}");
+                ulong nbSolutions = 0;
                 var startTime = DateTime.UtcNow;
                 foreach (var solution in SearchingSolver.Solve(trainLines, destination, bestSolution))
                 {

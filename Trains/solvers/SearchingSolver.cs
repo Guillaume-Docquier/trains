@@ -30,10 +30,17 @@ namespace Trains.Solvers
             return true;
         }
 
-        private IEnumerable<Solution> Solve(State state, List<Move> moves)
+        private IEnumerable<Solution> Solve(State state, List<Move> moves, bool logProgress = false)
         {
-            foreach (var move in moves)
+            var numberOfMoves = moves.Count;
+            if (logProgress)
             {
+                Console.WriteLine($"Solve has {numberOfMoves} moves to explore");
+            }
+
+            for (var i = 0; i < numberOfMoves; i++)
+            {
+                var move = moves[i];
                 var newState = State.ApplyMove(state, move);
                 var newCost = newState.Solution.Cost;
                 if (newCost >= this._bestSolution.Cost ||
@@ -54,6 +61,11 @@ namespace Trains.Solvers
                     {
                         yield return solution;
                     }
+                }
+
+                if (logProgress)
+                {
+                    Console.WriteLine($"Explored {i} moves out of {numberOfMoves}");
                 }
             }
         }
@@ -141,7 +153,7 @@ namespace Trains.Solvers
                 Solution = new Solution(""),
             };
             
-            return new SearchingSolver(bestSolution).Solve(state, GetAllUsefulMoves(state));
+            return new SearchingSolver(bestSolution).Solve(state, GetAllUsefulMoves(state), true);
         }
 
         public static List<Move> GetAllUsefulMoves(State state)
@@ -177,6 +189,7 @@ namespace Trains.Solvers
 
             // Shuffling the moves doesn't seem to improve the performance of the algorithm
             // I'm not sure if it's because of my test example or if it is applicable to every problem
+            // It really looks like it's NOT helping
             // moves.Shuffle();
 
             return moves;

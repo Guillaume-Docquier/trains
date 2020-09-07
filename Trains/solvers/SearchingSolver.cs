@@ -17,7 +17,7 @@ namespace Trains.Solvers
 
         private static string GetTrainLinesString(string[] trainLines)
         {
-            return trainLines.Aggregate(string.Empty, (current, trainLine) => current + trainLine);
+            return string.Join("", trainLines);
         }
 
         // Returns true if it's the best cost for this state we've seen so far
@@ -39,7 +39,7 @@ namespace Trains.Solvers
             {
                 var newState = State.ApplyMove(state, move);
                 var newCost = newState.Solution.Cost;
-                if (!this.TryStoreVisitedState(newState.TrainLines, newCost) || newCost >= this._bestSolution.Cost)
+                if (newCost >= this._bestSolution.Cost || !this.TryStoreVisitedState(newState.TrainLines, newCost))
                 {
                     yield return Solution.NoSolution;
                 }

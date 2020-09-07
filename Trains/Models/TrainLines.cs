@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Trains.ExtensionMethods;
 
-namespace Trains.models
+namespace Trains.Models
 {
     public static class TrainLines
     {

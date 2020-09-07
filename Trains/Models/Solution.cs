@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Trains.models
+namespace Trains.Models
 {
     public class Solution
     {

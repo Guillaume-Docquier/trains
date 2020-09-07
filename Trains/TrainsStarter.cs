@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Trains.models;
+using Trains.Models;
 using Trains.Solvers;
 
 namespace Trains

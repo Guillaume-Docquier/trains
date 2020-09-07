@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Trains.models;
+using Trains.Models;
 using Trains.Solvers;
 
 namespace Trains.Tests

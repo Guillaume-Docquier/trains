@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trains.models
+namespace Trains.Models
 {
     public class Move
     {

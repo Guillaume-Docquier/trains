@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Trains.models;
+using Trains.Models;
 
 namespace Trains.Solvers
 {

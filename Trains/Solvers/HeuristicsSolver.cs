@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Trains.models;
+using Trains.Models;
 
 namespace Trains.Solvers
 {

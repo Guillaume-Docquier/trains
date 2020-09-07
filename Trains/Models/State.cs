@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Trains.models
+namespace Trains.Models
 {
     public class State
     {
@@ -18,7 +18,7 @@ namespace Trains.models
 
             return new State
             {
-                TrainLines = models.TrainLines.ApplyMove(state.TrainLines, move),
+                TrainLines = Models.TrainLines.ApplyMove(state.TrainLines, move),
                 Destination = state.Destination,
                 Solution = newSolution
             };
@@ -26,7 +26,7 @@ namespace Trains.models
 
         public static bool IsDone(State state)
         {
-            return state.TrainLines.All(trainLine => models.TrainLines.IsDone(trainLine, state.Destination));
+            return state.TrainLines.All(trainLine => Models.TrainLines.IsDone(trainLine, state.Destination));
         }
 
         protected bool Equals(State other)

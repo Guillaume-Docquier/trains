@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trains", "Trains\Trains.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trains.Tests", "Trains.Tests\Trains.Tests.csproj", "{F4C2F112-9723-4750-81FA-47A8E4AC5AFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks", "Benchmarks\Benchmarks.csproj", "{A0D26236-D5FF-493A-9442-7B851777AFF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{F4C2F112-9723-4750-81FA-47A8E4AC5AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4C2F112-9723-4750-81FA-47A8E4AC5AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4C2F112-9723-4750-81FA-47A8E4AC5AFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D26236-D5FF-493A-9442-7B851777AFF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D26236-D5FF-493A-9442-7B851777AFF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D26236-D5FF-493A-9442-7B851777AFF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D26236-D5FF-493A-9442-7B851777AFF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

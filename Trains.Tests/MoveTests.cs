@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Trains.models;
+using Trains.Models;
 
 namespace Trains.Tests
 {

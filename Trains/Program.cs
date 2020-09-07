@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Trains.models;
+using Trains.Models;
 
 namespace Trains
 {

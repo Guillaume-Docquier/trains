@@ -37,12 +37,12 @@ namespace Trains.Solvers
                 var newState = State.ApplyMove(state, move);
                 var newCost = newState.Solution.Cost;
                 if (newCost >= this._bestSolution.Cost ||
-                    !this.TryStoreVisitedState(newState.TrainLines, newCost) ||
-                    !HasPotential(newState, this._bestSolution.Cost))
+                    !HasPotential(newState, this._bestSolution.Cost) ||
+                    !this.TryStoreVisitedState(newState.TrainLines, newCost))
                 {
                     yield return Solution.NoSolution;
                 }
-                else if (State.IsDone(newState) && newCost < this._bestSolution.Cost)
+                else if (State.IsDone(newState))
                 {
                     this._bestSolution = newState.Solution;
 
@@ -60,18 +60,37 @@ namespace Trains.Solvers
 
         public static bool HasPotential(State state, int maxCost)
         {
-            var estimatedAdditionalCost = 0;
+            var estimatedAdditionalMoves = 0;
             foreach (var trainLine in state.TrainLines)
             {
-                var wagonsToMove = TrainLines.GetNumberOfWagonsToMoveToFreeTheLine(trainLine, state.Destination);
-                var wagonsToMoveCost = FastCeiling((double)wagonsToMove / TrainLines.LocomotiveStrength);
+                var groupsOfWagons = TrainLines.GetTrainLineWagons(trainLine).Split(state.Destination).ToList();
+                if (groupsOfWagons.Count == 2 && groupsOfWagons[0] == string.Empty)
+                {
+                    estimatedAdditionalMoves += 1;
+                }
+                else if (groupsOfWagons.Count == 2)
+                {
+                    var numberOfWagonMoves = FastCeiling((double)groupsOfWagons[0].Length / TrainLines.LocomotiveStrength);
 
-                var groupsOfDestinationWagonsToMove = RemoveConsecutiveDuplicates(trainLine).Count(wagon => wagon == state.Destination);
-                
-                estimatedAdditionalCost += wagonsToMoveCost + groupsOfDestinationWagonsToMove;
+                    estimatedAdditionalMoves += numberOfWagonMoves + 1;
+                }
+                else if (groupsOfWagons.Count > 2)
+                {
+                    var groupsOfWagonsToMove = groupsOfWagons.Where(group => !string.IsNullOrEmpty(group)).ToList();
+                    var endsWithDestinationWagons = groupsOfWagons.Last() == string.Empty;
+                    var numberOfDestinationWagonMoves = groupsOfWagonsToMove.Count - (endsWithDestinationWagons ? 0 : 1);
+
+                    if (!endsWithDestinationWagons)
+                    {
+                        groupsOfWagonsToMove.RemoveAt(groupsOfWagonsToMove.Count - 1);
+                    }
+                    var numberOfWagonMoves = groupsOfWagonsToMove.Select(group => FastCeiling((double)group.Length / TrainLines.LocomotiveStrength)).Sum();
+
+                    estimatedAdditionalMoves += numberOfWagonMoves + numberOfDestinationWagonMoves;
+                }
             }
 
-            return state.Solution.Cost + estimatedAdditionalCost * (Move.MoveCost + Move.DistanceCost) < maxCost;
+            return state.Solution.Cost + estimatedAdditionalMoves * (Move.MoveCost + Move.DistanceCost) < maxCost;
         }
 
         // Apparently Math.Ceiling is very slow

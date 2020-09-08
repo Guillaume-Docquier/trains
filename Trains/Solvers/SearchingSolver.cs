@@ -64,7 +64,7 @@ namespace Trains.Solvers
 
                 if (logProgress)
                 {
-                    Console.WriteLine($"Explored {i} moves out of {numberOfMoves}");
+                    Console.WriteLine($"Explored {i + 1} moves out of {numberOfMoves}");
                 }
             }
         }
@@ -90,7 +90,7 @@ namespace Trains.Solvers
                 var groupsOfWagons = wagons.Split(state.Destination).ToList();
                 if (groupsOfWagons.All(wagon => wagon == string.Empty))
                 {
-                    estimatedAdditionalMoves += FastCeiling((double)groupsOfWagons.Count / TrainLines.LocomotiveStrength);
+                    estimatedAdditionalMoves += Optimizations.Ceiling(groupsOfWagons.Count, TrainLines.LocomotiveStrength);
                 }
                 else if (groupsOfWagons.Count == 2 && groupsOfWagons[0] == string.Empty)
                 {
@@ -98,7 +98,7 @@ namespace Trains.Solvers
                 }
                 else if (groupsOfWagons.Count == 2)
                 {
-                    var numberOfWagonMoves = FastCeiling((double)groupsOfWagons[0].Length / TrainLines.LocomotiveStrength);
+                    var numberOfWagonMoves = Optimizations.Ceiling(groupsOfWagons[0].Length, TrainLines.LocomotiveStrength);
 
                     estimatedAdditionalMoves += numberOfWagonMoves + 1;
                 }
@@ -110,7 +110,7 @@ namespace Trains.Solvers
                     {
                         groupsOfWagonsToMove.RemoveAt(groupsOfWagonsToMove.Count - 1);
                     }
-                    var numberOfWagonMoves = groupsOfWagonsToMove.Select(group => FastCeiling((double)group.Length / TrainLines.LocomotiveStrength)).Sum();
+                    var numberOfWagonMoves = groupsOfWagonsToMove.Select(group => Optimizations.Ceiling(group.Length, TrainLines.LocomotiveStrength)).Sum();
                     var numberOfDestinationWagonMoves = RemoveConsecutiveDuplicates(trainLine).Count(wagon => wagon == state.Destination);
 
                     estimatedAdditionalMoves += numberOfWagonMoves + numberOfDestinationWagonMoves;
@@ -118,15 +118,6 @@ namespace Trains.Solvers
             }
 
             return estimatedAdditionalMoves * (Move.MoveCost + Move.DistanceCost);
-        }
-
-        // Apparently Math.Ceiling is very slow
-        // https://stackoverflow.com/a/53520604
-        // https://www.codeproject.com/Tips/700780/Fast-floor-ceiling-functions
-        public static int FastCeiling(double number)
-        {
-            var rounded = (int)number;
-            return rounded < number ? rounded + 1 : rounded;
         }
 
         public static string RemoveConsecutiveDuplicates(string trainLine)

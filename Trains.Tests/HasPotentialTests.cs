@@ -125,7 +125,7 @@ namespace Trains.Tests
             foreach (var trainLine in state.TrainLines)
             {
                 var wagonsToMove = TrainLines.GetNumberOfWagonsToMoveToFreeTheLine(trainLine, state.Destination);
-                var wagonsToMoveCost = SearchingSolver.FastCeiling((double)wagonsToMove / TrainLines.LocomotiveStrength);
+                var wagonsToMoveCost = Optimizations.Ceiling(wagonsToMove, TrainLines.LocomotiveStrength);
 
                 var groupsOfDestinationWagonsToMove = SearchingSolver.RemoveConsecutiveDuplicates(trainLine).Count(wagon => wagon == state.Destination);
                 

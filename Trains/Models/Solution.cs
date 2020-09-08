@@ -33,7 +33,7 @@ namespace Trains.Models
             }
             else
             {
-                SolutionString += $"{MoveSeparator}{move}";
+                SolutionString = string.Concat(SolutionString, MoveSeparator, move);
                 Cost += Move.GetCost(move);
             }
         }

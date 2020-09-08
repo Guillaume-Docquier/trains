@@ -15,7 +15,7 @@ namespace Trains.ExtensionMethods
             var before = text.Substring(0, index);
             var after = text.Substring(index + oldValue.Length);
 
-            return $"{before}{newValue}{after}";
+            return string.Concat(before, newValue, after);
         }
     }
 }

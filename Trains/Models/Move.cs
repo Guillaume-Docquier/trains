@@ -6,7 +6,8 @@ namespace Trains.Models
     {
         public const int MoveCost = 1;
         public const int DistanceCost = 1;
-        private const char MoveComponentsSeparator = ',';
+        private const char MoveComponentsSeparatorChar = ',';
+        private const string MoveComponentsSeparatorString = ",";
 
         public string Wagons { get; set; }
         
@@ -31,12 +32,12 @@ namespace Trains.Models
 
         public override string ToString()
         {
-            return $"{Wagons}{MoveComponentsSeparator}{From + 1}{MoveComponentsSeparator}{To + 1}";
+            return string.Concat(Wagons, MoveComponentsSeparatorString, From + 1, MoveComponentsSeparatorString, To + 1);
         }
 
         public static Move Parse(string move)
         {
-            var components = move.Split(MoveComponentsSeparator);
+            var components = move.Split(MoveComponentsSeparatorChar);
 
             return new Move
             {

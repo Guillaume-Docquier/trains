@@ -82,8 +82,9 @@ namespace Trains.Models
         public static string AddWagonsToTrainLine(string trainLine, string wagonsToAdd)
         {
             var remainingFreeSlots = GetTrainLineFreeSpace(trainLine).Substring(wagonsToAdd.Length);
-
-            return $"{remainingFreeSlots}{wagonsToAdd}{GetTrainLineWagons(trainLine)}";
+            var existingWagons = GetTrainLineWagons(trainLine);
+            
+            return $"{remainingFreeSlots}{wagonsToAdd}{existingWagons}";
         }
 
         public static bool IsValidMove(string[] trainLines, char destination, Move move)
@@ -100,7 +101,6 @@ namespace Trains.Models
         {
             var nbWagons = 0;
             return GetTrainLineWagons(trainLine)
-                .ToCharArray()
                 .TakeWhile(wagon => (nbWagons += 1) <= LocomotiveStrength)
                 .Aggregate(string.Empty, (current, wagon) => current + wagon);
         }

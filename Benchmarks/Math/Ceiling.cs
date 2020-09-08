@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Benchmarks.Benchmarks
+namespace Benchmarks.Math
 {
-    public static class MathCeiling
+    public static class Ceiling
     {
         private const int TestDataCount = 500000000;
         private static readonly Dictionary<string, Func<int, int, int>> Methods = new Dictionary<string, Func<int, int, int>> {
@@ -80,7 +80,7 @@ namespace Benchmarks.Benchmarks
         {
             var floatingPoint = (double)value / divisor;
 
-            return (int)Math.Ceiling(floatingPoint);
+            return (int)System.Math.Ceiling(floatingPoint);
         }
     }
 }

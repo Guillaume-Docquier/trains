@@ -123,7 +123,7 @@ namespace Trains.Solvers
         public static string RemoveConsecutiveDuplicates(string trainLine)
         {
             var strResult = new StringBuilder();
-            foreach (var element in trainLine.ToCharArray())
+            foreach (var element in trainLine)
             {
                 if (strResult.Length == 0 || strResult[^1] != element)
                 {
@@ -176,7 +176,7 @@ namespace Trains.Solvers
         // Returns true if it's the best cost for this state we've seen so far
         private bool TryStoreVisitedState(string[] trainLines, int cost)
         {
-            var stateKey = string.Join("", trainLines);
+            var stateKey = string.Concat(trainLines);
             if(this._visitedStates.TryGetValue(stateKey, out var bestCost) && cost >= bestCost)
             {
                 return false;

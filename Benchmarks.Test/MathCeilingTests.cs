@@ -1,4 +1,4 @@
-using Benchmarks.Benchmarks;
+using Benchmarks.Math;
 using NUnit.Framework;
 
 namespace Benchmarks.Test
@@ -16,7 +16,7 @@ namespace Benchmarks.Test
         [TestCase(0, 2, 0)]
         public void CastComparisonCeiling_Ceils_Correctly(int value, int divisor, int expected)
         {
-            var result = MathCeiling.CastComparisonCeiling(value, divisor);
+            var result = Ceiling.CastComparisonCeiling(value, divisor);
 
             Assert.AreEqual(expected, result);
         }
@@ -32,7 +32,7 @@ namespace Benchmarks.Test
         [TestCase(0, 2, 0)]
         public void CastOffsetCeiling_Ceils_Correctly(int value, int divisor, int expected)
         {
-            var result = MathCeiling.CastComparisonCeiling(value, divisor);
+            var result = Ceiling.CastComparisonCeiling(value, divisor);
 
             Assert.AreEqual(expected, result);
         }
@@ -48,7 +48,7 @@ namespace Benchmarks.Test
         [TestCase(0, 2, 0)]
         public void ModuloCeiling_Ceils_Correctly(int value, int divisor, int expected)
         {
-            var result = MathCeiling.CastComparisonCeiling(value, divisor);
+            var result = Ceiling.CastComparisonCeiling(value, divisor);
 
             Assert.AreEqual(expected, result);
         }
@@ -64,7 +64,7 @@ namespace Benchmarks.Test
         [TestCase(0, 2, 0)]
         public void SumMinusOneCeiling_Ceils_Correctly(int value, int divisor, int expected)
         {
-            var result = MathCeiling.CastComparisonCeiling(value, divisor);
+            var result = Ceiling.CastComparisonCeiling(value, divisor);
 
             Assert.AreEqual(expected, result);
         }
@@ -80,7 +80,7 @@ namespace Benchmarks.Test
         [TestCase(0, 2, 0)]
         public void BuiltIn_Ceils_Correctly(int value, int divisor, int expected)
         {
-            var result = MathCeiling.CastComparisonCeiling(value, divisor);
+            var result = Ceiling.CastComparisonCeiling(value, divisor);
 
             Assert.AreEqual(expected, result);
         }

@@ -6,6 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="Samples\c-bottleneck.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
       <EmbeddedResource Include="Samples\c-impossible.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>

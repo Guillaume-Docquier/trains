@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Trains.Models
@@ -11,6 +12,8 @@ namespace Trains.Models
         private const string MoveSeparator = ";";
 
         public int Cost { get; private set; }
+
+        public int NumberOfMoves { get; private set; }
         
         public string SolutionString { get; private set; }
 
@@ -18,6 +21,7 @@ namespace Trains.Models
         {
             SolutionString = solutionString;
             Cost = GetCost(solutionString);
+            NumberOfMoves = GetMoves(solutionString).Count();
         }
 
         private Solution()
@@ -26,16 +30,12 @@ namespace Trains.Models
 
         public void AddMove(Move move)
         {
-            if (string.IsNullOrEmpty(SolutionString))
-            {
-                SolutionString = move.ToString();
-                Cost = Move.GetCost(move);
-            }
-            else
-            {
-                SolutionString = string.Concat(SolutionString, MoveSeparator, move);
-                Cost += Move.GetCost(move);
-            }
+            SolutionString = string.IsNullOrEmpty(SolutionString) ?
+                move.ToString() :
+                string.Concat(SolutionString, MoveSeparator, move);
+
+            Cost += Move.GetCost(move);
+            NumberOfMoves++;
         }
 
         public Solution Clone()
@@ -43,7 +43,8 @@ namespace Trains.Models
             return new Solution
             {
                 SolutionString = SolutionString,
-                Cost = Cost
+                Cost = Cost,
+                NumberOfMoves = NumberOfMoves
             };
         }
 
@@ -60,12 +61,17 @@ namespace Trains.Models
 
         public static IEnumerable<Move> GetMoves(string solution)
         {
+            if (string.IsNullOrEmpty(solution))
+            {
+                return ImmutableList<Move>.Empty;
+            }
+
             return solution.Split(MoveSeparator).Select(Move.Parse);
         }
 
         protected bool Equals(Solution other)
         {
-            return Cost == other.Cost && SolutionString == other.SolutionString;
+            return Cost == other.Cost && NumberOfMoves == other.NumberOfMoves && SolutionString == other.SolutionString;
         }
 
         public override bool Equals(object obj)
@@ -78,7 +84,7 @@ namespace Trains.Models
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Cost, SolutionString);
+            return HashCode.Combine(Cost, NumberOfMoves, SolutionString);
         }
     }
 }

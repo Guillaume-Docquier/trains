@@ -111,9 +111,9 @@ namespace Trains.Tests
         {
             var cost1 = PotentialCostWithMinimalMoves(state);
             var cost2 = PotentialCostWithMinimalMovesAndMinimalDistance(state);
-            var cost3 = SearchingSolver.GetEstimatedAdditionalCost(state);
-            var cost4 = Solution.GetCost(HeuristicsSolver.Solve(state.TrainLines, state.Destination)); 
-            
+            var cost3 = PotentialCostWithMinimalMovesAndMinimalDistanceWithRealisticEvaluation(state);
+            var cost4 = Solution.GetCost(HeuristicsSolver.Solve(state.TrainLines, state.Destination));
+
             Assert.GreaterOrEqual(cost2, cost1);
             Assert.GreaterOrEqual(cost3, cost2);
             Assert.GreaterOrEqual(cost4, cost3);
@@ -138,6 +138,11 @@ namespace Trains.Tests
         private int PotentialCostWithMinimalMovesAndMinimalDistance(State state)
         {
             return PotentialCostWithMinimalMoves(state) * (Move.MoveCost + Move.DistanceCost);
+        }
+
+        private int PotentialCostWithMinimalMovesAndMinimalDistanceWithRealisticEvaluation(State state)
+        {
+            return SearchingSolver.GetEstimatedAdditionalMoves(state) * (Move.MoveCost + Move.DistanceCost);
         }
     }
 }

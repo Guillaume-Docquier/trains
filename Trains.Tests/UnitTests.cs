@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Trains.Models;
@@ -21,7 +22,7 @@ namespace Trains.Tests
 
             Assert.LessOrEqual(cost, expectedCost);
         }
-        
+
         [Test]
         [TestCase(new[] { "0000AGCAG", "00DCACGDG" }, 'C')]
         public void SearchingSolver_Can_Find_Better_Solutions_Than_HeuristicsSolver(string[] trainLines, char destination)
@@ -33,7 +34,18 @@ namespace Trains.Tests
         }
 
         [Test]
-        public void Cost_Calculator()
+        public void Solution_Cost_Calculator()
+        {
+            var solutionString = "A,2,0;AA,5,0;A,6,0;CC,2,1;A,2,0;CDG,3,2;A,3,0;DG,3,2;A,3,0;DGD,4,3;G,4,3;A,4,0;DG,5,4;A,5,0";
+            
+            var solution = new Solution(solutionString);
+            
+            var nbMoves = Solution.GetMoves(solution.SolutionString).Count();
+            var cost = solution.Cost;
+        }
+
+        [Test]
+        public void Moves_Cost_Calculator()
         {
             var moves = new List<Move>
             {
@@ -52,13 +64,15 @@ namespace Trains.Tests
                 Move.Parse("A,5,0"),
                 Move.Parse("A,6,0")
             };
-            
-            var solution = new Solution("");
 
+            var solution = new Solution("");
             foreach (var move in moves)
             {
                 solution.AddMove(move);
             }
+
+            var nbMoves = Solution.GetMoves(solution.SolutionString).Count();
+            var cost = solution.Cost;
         }
-    }   
+    }
 }

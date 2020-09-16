@@ -37,6 +37,10 @@ namespace Trains.Models
 
         public static Move Parse(string move)
         {
+            if (string.IsNullOrEmpty(move))
+            {
+                var stop = 0;
+            }
             var components = move.Split(MoveComponentsSeparatorChar);
 
             return new Move

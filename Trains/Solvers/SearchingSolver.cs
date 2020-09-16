@@ -41,9 +41,11 @@ namespace Trains.Solvers
             {
                 var move = moves[i];
                 var newState = State.ApplyMove(state, move);
+                var newNumberOfMoves = newState.Solution.NumberOfMoves;
                 var newCost = newState.Solution.Cost;
-                if (newCost >= this._bestSolution.Cost ||
-                    !HasPotential(newState, this._bestSolution.Cost) ||
+                if (newNumberOfMoves > this._bestSolution.NumberOfMoves ||
+                    newCost >= this._bestSolution.Cost ||
+                    !HasPotential(newState, this._bestSolution.NumberOfMoves, this._bestSolution.Cost) ||
                     !this.TryStoreVisitedState(newState.TrainLines, newCost))
                 {
                     yield return Solution.NoSolution;
@@ -69,14 +71,16 @@ namespace Trains.Solvers
             }
         }
 
-        public static bool HasPotential(State state, int maxCost)
+        public static bool HasPotential(State state, int maxMoves, int maxCost)
         {
-            var estimatedAdditionalCost = GetEstimatedAdditionalCost(state);
-
-            return state.Solution.Cost + estimatedAdditionalCost < maxCost;
+            var estimatedAdditionalMoves = GetEstimatedAdditionalMoves(state);
+            var estimatedAdditionalCost = estimatedAdditionalMoves * (Move.MoveCost + Move.DistanceCost);
+            
+            return state.Solution.NumberOfMoves + estimatedAdditionalMoves <= maxMoves &&
+                   state.Solution.Cost + estimatedAdditionalCost < maxCost;
         }
 
-        public static int GetEstimatedAdditionalCost(State state)
+        public static int GetEstimatedAdditionalMoves(State state)
         {
             var estimatedAdditionalMoves = 0;
             foreach (var trainLine in state.TrainLines)
@@ -117,7 +121,7 @@ namespace Trains.Solvers
                 }
             }
 
-            return estimatedAdditionalMoves * (Move.MoveCost + Move.DistanceCost);
+            return estimatedAdditionalMoves;
         }
 
         public static string RemoveConsecutiveDuplicates(string trainLine)

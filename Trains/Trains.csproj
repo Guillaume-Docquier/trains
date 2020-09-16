@@ -6,24 +6,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Samples\c-bottleneck.txt">
+      <EmbeddedResource Include="Samples\bottleneck-c.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
-      <EmbeddedResource Include="Samples\c-impossible.txt">
+      <EmbeddedResource Include="Samples\impossible-c.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="samples\easy-01.txt" />
-      <EmbeddedResource Include="Samples\c-scope-bm.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Samples\easy-01.txt">
+      <EmbeddedResource Include="Samples\scope-c.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="samples\hard-01.txt" />
-      <EmbeddedResource Include="Samples\c-speed-bm.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Samples\hard-01.txt">
+      <EmbeddedResource Include="Samples\speed-c.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>

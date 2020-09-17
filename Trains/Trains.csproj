@@ -20,6 +20,14 @@
       <EmbeddedResource Include="Samples\speed-c.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
+      <None Remove="samples\easy-a.txt" />
+      <EmbeddedResource Include="samples\easy-a.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="samples\hard-d.txt" />
+      <EmbeddedResource Include="samples\hard-d.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

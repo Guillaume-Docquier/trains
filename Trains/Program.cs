@@ -7,7 +7,7 @@ namespace Trains
 {
     public class Program
     {
-        private const string DefaultFileName = "easy-01";
+        private const string DefaultFileName = "easy-a";
 
         static void Main(string[] args)
         {
@@ -16,7 +16,7 @@ namespace Trains
                 var trainLines = new string[0];
                 while (trainLines.Length == 0)
                 {
-                    Console.WriteLine("\nData file name (without .txt):");
+                    Console.WriteLine($"\nData file name (default is '{DefaultFileName}'):");
                     var dataFileName = Console.ReadLine();
                     if (string.IsNullOrEmpty(dataFileName))
                     {

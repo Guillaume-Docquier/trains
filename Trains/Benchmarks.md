@@ -48,7 +48,7 @@ The cost function of a move for all the tests is: `1 + Abs(from - to)`
 # hard-d
 | Commit | Running&nbsp;Time | Moves | Cost | Paths&nbsp;Explored | Solution |
 |--------|-------------------|-------|------|--------------------:|----------|
-|[a220fb0](https://github.com/Guillaume-Docquier/trains/commit/a220fb096bfd808ac96dbf479baa462d01d06d54)|00:10:00+|31|83|103.682.137|D,1,0;G,1,2;C,1,5;D,1,0;GAC,2,1;CAC,2,1;DG,4,2;CD,3,2;GA,3,2;D,4,3;GAD,4,3;GAC,2,4;GA,3,4;DDD,3,0;GAD,3,2;GA,2,3;DDD,2,0;GCG,2,3;D,2,0;CAA,5,2;DGA,5,2;DCG,5,3;D,3,2;D,5,2;DDD,2,0;ACG,6,5;DCG,6,5;D,6,5;EGD,6,5;EG,5,6;DDD,5,0|
+|[a220fb0](https://github.com/Guillaume-Docquier/trains/commit/a220fb096bfd808ac96dbf479baa462d01d06d54)|06:26:48|31|78|4.262.553.487|C,3,5;D,4,3;A,2,4;DD,3,1;DDD,1,0;GC,1,3;D,1,0;CCA,2,1;CCG,2,1;D,2,0;G,3,2;CGA,3,2;DGA,3,2;D,2,0;AGD,4,3;AG,3,2;GAD,4,3;GA,3,4;DDD,3,0;CAA,5,3;DGA,5,3;DCG,5,4;D,5,4;DD,4,3;DDD,3,0;ACG,6,5;DCG,6,5;D,6,5;EGD,6,5;EG,5,4;DDD,5,0|
 |[05d9692](https://github.com/Guillaume-Docquier/trains/commit/05d96929057da4e9431f275ded44df76b4a069ad)|00:10:00+|-|-|74.156.831|-|
 |[a85beac](https://github.com/Guillaume-Docquier/trains/commit/a85beacb22799438f6aa498255c8482bbe330e46)|00:10:00+|||||
 |[9a9cb95](https://github.com/Guillaume-Docquier/trains/commit/9a9cb95d49e3c02ff6ec0aa410686f16d2d2f370)|00:10:00+|||||

@@ -1,7 +1,11 @@
 ﻿# Benchmarks of the different samples over time
-A running time 10m+ denotes an execution that did not complete after 10 minutes.  
-Note that the number of paths explored are not exact figures since the execution speed depends on what ran on the CPU at the time.  
-They do, however, give good indications on execution speed.  
+The benchmark uses 4 problems that are increasingly hard to solve.  
+First, an heuristics is ran against the problem to find an upper bound.  
+Then, we run a search algorithm.  
+
+The runnning time only mesures the search algorithm.  
+A running time '00:10:00+' denotes an execution that did not complete after 10 minutes.  
+A number of moves or cost '-' indicates that no better solution was found with the search algorithm.  
 
 # The cost function
 The cost function of a move for all the tests is: `1 + Abs(from - to)`

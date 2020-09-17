@@ -11,8 +11,8 @@ The cost function of a move for all the tests is: `1 + Abs(from - to)`
 |--------|-------------------|-------|------|--------------------:|----------|
 |[a220fb0](https://github.com/Guillaume-Docquier/trains/commit/a220fb096bfd808ac96dbf479baa462d01d06d54)|00:00:00|8|16|344|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
 |[05d9692](https://github.com/Guillaume-Docquier/trains/commit/05d96929057da4e9431f275ded44df76b4a069ad)|00:00:00|8|16|779|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
-|[a85beac](https://github.com/Guillaume-Docquier/trains/commit/a85beacb22799438f6aa498255c8482bbe330e46)|00:00:00|8|16|1407|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
-|[9a9cb95](https://github.com/Guillaume-Docquier/trains/commit/9a9cb95d49e3c02ff6ec0aa410686f16d2d2f370)|00:00:00|8|16|2357|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
+|[a85beac](https://github.com/Guillaume-Docquier/trains/commit/a85beacb22799438f6aa498255c8482bbe330e46)|00:00:00|8|16|1.407|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
+|[9a9cb95](https://github.com/Guillaume-Docquier/trains/commit/9a9cb95d49e3c02ff6ec0aa410686f16d2d2f370)|00:00:00|8|16|2.357|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
 |[d36e848](https://github.com/Guillaume-Docquier/trains/commit/d36e84858c07b6bfa1f6ba574604eedd40b3052c)|00:00:02|8|16|627.540|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
 |[dfe3107](https://github.com/Guillaume-Docquier/trains/commit/dfe31079048f41b877707492fcf33d504c494529)|00:02:05|8|16|54.877.166|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
 |[f7964d9](https://github.com/Guillaume-Docquier/trains/commit/f7964d9a1f19dc05d1c3c6cfd8a96703614ba310)|00:02:27|8|16|54.877.166|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
@@ -22,10 +22,10 @@ The cost function of a move for all the tests is: `1 + Abs(from - to)`
 # level-1-c
 | Commit | Running&nbsp;Time | Moves | Cost | Paths&nbsp;Explored | Solution |
 |--------|-------------------|-------|------|--------------------:|----------|
-|[a220fb0](https://github.com/Guillaume-Docquier/trains/commit/a220fb096bfd808ac96dbf479baa462d01d06d54)|00:00:00|10|21|4128|AG,1,2;C,1,0;AGD,2,1;CA,2,1;C,1,0;BC,3,2;B,2,1;DC,3,2;D,2,1;CCC,2,0|
-|[05d9692](https://github.com/Guillaume-Docquier/trains/commit/05d96929057da4e9431f275ded44df76b4a069ad)|00:00:00|10|21|26115|AG,1,2;C,1,0;AGD,2,1;CA,2,1;C,1,0;BC,3,2;B,2,1;DC,3,2;D,2,1;CCC,2,0|
-|[a85beac](https://github.com/Guillaume-Docquier/trains/commit/a85beacb22799438f6aa498255c8482bbe330e46)|00:00:00|10|21|39066|AG,1,2;C,1,0;AGD,2,1;CA,2,1;C,1,0;BC,3,2;B,2,1;DC,3,2;D,2,1;CCC,2,0|
-|[9a9cb95](https://github.com/Guillaume-Docquier/trains/commit/9a9cb95d49e3c02ff6ec0aa410686f16d2d2f370)|00:00:00|10|21|98300|AG,1,2;C,1,0;AGD,2,1;CA,2,1;C,1,0;BC,3,2;B,2,1;DC,3,2;D,2,1;CCC,2,0|
+|[a220fb0](https://github.com/Guillaume-Docquier/trains/commit/a220fb096bfd808ac96dbf479baa462d01d06d54)|00:00:00|10|21|4.128|AG,1,2;C,1,0;AGD,2,1;CA,2,1;C,1,0;BC,3,2;B,2,1;DC,3,2;D,2,1;CCC,2,0|
+|[05d9692](https://github.com/Guillaume-Docquier/trains/commit/05d96929057da4e9431f275ded44df76b4a069ad)|00:00:00|10|21|26.115|AG,1,2;C,1,0;AGD,2,1;CA,2,1;C,1,0;BC,3,2;B,2,1;DC,3,2;D,2,1;CCC,2,0|
+|[a85beac](https://github.com/Guillaume-Docquier/trains/commit/a85beacb22799438f6aa498255c8482bbe330e46)|00:00:00|10|21|39.066|AG,1,2;C,1,0;AGD,2,1;CA,2,1;C,1,0;BC,3,2;B,2,1;DC,3,2;D,2,1;CCC,2,0|
+|[9a9cb95](https://github.com/Guillaume-Docquier/trains/commit/9a9cb95d49e3c02ff6ec0aa410686f16d2d2f370)|00:00:00|10|21|98.300|AG,1,2;C,1,0;AGD,2,1;CA,2,1;C,1,0;BC,3,2;B,2,1;DC,3,2;D,2,1;CCC,2,0|
 |[d36e848](https://github.com/Guillaume-Docquier/trains/commit/d36e84858c07b6bfa1f6ba574604eedd40b3052c)|00:01:02|10|21|19.987.886|AG,1,2;C,1,0;AGD,2,1;CA,2,1;C,1,0;BC,3,2;B,2,1;DC,3,2;D,2,1;CCC,2,0|
 |[dfe3107](https://github.com/Guillaume-Docquier/trains/commit/dfe31079048f41b877707492fcf33d504c494529)|00:10:00+|12|26|248.232.075|A,1,2;G,1,2;C,1,0;A,1,3;GAD,2,1;CA,2,1;C,1,0;ABC,3,2;AB,2,1;DC,3,2;D,2,1;CCC,2,0|
 |[f7964d9](https://github.com/Guillaume-Docquier/trains/commit/f7964d9a1f19dc05d1c3c6cfd8a96703614ba310)|00:10:00+|12|26|216.409.319|A,1,2;G,1,2;C,1,0;A,1,3;GAD,2,1;CA,2,1;C,1,0;ABC,3,2;AB,2,1;DC,3,2;D,2,1;CCC,2,0|

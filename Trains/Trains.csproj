@@ -12,19 +12,15 @@
       <EmbeddedResource Include="Samples\impossible-c.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="samples\easy-01.txt" />
-      <EmbeddedResource Include="Samples\scope-c.txt">
+      <EmbeddedResource Include="Samples\level-0-c.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="samples\hard-01.txt" />
-      <EmbeddedResource Include="Samples\speed-c.txt">
+      <EmbeddedResource Include="Samples\level-1-c.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="samples\easy-a.txt" />
       <EmbeddedResource Include="samples\level-2-a.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="samples\hard-d.txt" />
       <EmbeddedResource Include="samples\level-3-d.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>

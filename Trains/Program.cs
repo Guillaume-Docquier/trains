@@ -7,7 +7,7 @@ namespace Trains
 {
     public class Program
     {
-        private const string DefaultFileName = "easy-a";
+        private const string DefaultFileName = "level-2-a";
 
         static void Main(string[] args)
         {

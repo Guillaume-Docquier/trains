@@ -21,11 +21,11 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="samples\easy-a.txt" />
-      <EmbeddedResource Include="samples\easy-a.txt">
+      <EmbeddedResource Include="samples\level-2-a.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="samples\hard-d.txt" />
-      <EmbeddedResource Include="samples\hard-d.txt">
+      <EmbeddedResource Include="samples\level-3-d.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>

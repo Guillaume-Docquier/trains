@@ -22,6 +22,7 @@ The cost function of a move for all the tests is: `1 + Abs(from - to)`
 |[f7964d9](https://github.com/Guillaume-Docquier/trains/commit/f7964d9a1f19dc05d1c3c6cfd8a96703614ba310)|00:02:27|8|16|54.877.166|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
 |[53deb39](https://github.com/Guillaume-Docquier/trains/commit/53deb39f9433c2bf6a989d448342b66c939b90d1)|00:04:02|8|16|54.877.166|AG,1,2;C,1,0;AGD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
 |[4e38515](https://github.com/Guillaume-Docquier/trains/commit/4e38515c1960cdc8c52431ede1f4d8cbfe9f161d)|00:10:00+|9|18|138.201.274|A,1,2;G,1,2;C,1,0;GAD,2,1;CA,2,1;DC,3,2;D,2,3;CC,2,1;CCC,1,0|
+|Heuristic|00:00:00|8|21|-|D,3,1;C,3,0;D,2,3;C,2,0;A,2,3;C,2,0;DAG,1,2;C,1,0|
 
 # level-1-c
 | Commit | Running&nbsp;Time | Moves | Cost | Paths&nbsp;Explored | Solution |
@@ -35,6 +36,7 @@ The cost function of a move for all the tests is: `1 + Abs(from - to)`
 |[f7964d9](https://github.com/Guillaume-Docquier/trains/commit/f7964d9a1f19dc05d1c3c6cfd8a96703614ba310)|00:10:00+|12|26|216.409.319|A,1,2;G,1,2;C,1,0;A,1,3;GAD,2,1;CA,2,1;C,1,0;ABC,3,2;AB,2,1;DC,3,2;D,2,1;CCC,2,0|
 |[53deb39](https://github.com/Guillaume-Docquier/trains/commit/53deb39f9433c2bf6a989d448342b66c939b90d1)|00:10:00+|-|-|103.556.631|-|
 |[4e38515](https://github.com/Guillaume-Docquier/trains/commit/4e38515c1960cdc8c52431ede1f4d8cbfe9f161d)|00:10:00+|-|-|119.418.160|-|
+|Heuristic|00:00:00|10|28|-|AG,1,3;C,1,0;D,2,1;C,2,0;A,2,1;C,2,0;AGB,3,2;C,3,0;D,3,1;C,3,0|
 
 # level-2-a
 | Commit | Running&nbsp;Time | Moves | Cost | Paths&nbsp;Explored | Solution |
@@ -48,6 +50,7 @@ The cost function of a move for all the tests is: `1 + Abs(from - to)`
 |[f7964d9](https://github.com/Guillaume-Docquier/trains/commit/f7964d9a1f19dc05d1c3c6cfd8a96703614ba310)|-|-|-|-|-|
 |[53deb39](https://github.com/Guillaume-Docquier/trains/commit/53deb39f9433c2bf6a989d448342b66c939b90d1)|-|-|-|-|-|
 |[4e38515](https://github.com/Guillaume-Docquier/trains/commit/4e38515c1960cdc8c52431ede1f4d8cbfe9f161d)|-|-|-|-|-|
+|Heuristic|00:00:00|14|54|-|A,2,0;AA,5,0;A,6,0;CC,2,1;A,2,0;DG,5,2;A,5,0;DGD,4,5;G,4,2;A,4,0;CDG,3,4;A,3,0;DG,3,5;A,3,0|
 
 # level-3-d
 | Commit | Running&nbsp;Time | Moves | Cost | Paths&nbsp;Explored | Solution |
@@ -61,3 +64,4 @@ The cost function of a move for all the tests is: `1 + Abs(from - to)`
 |[f7964d9](https://github.com/Guillaume-Docquier/trains/commit/f7964d9a1f19dc05d1c3c6cfd8a96703614ba310)|-|-|-|-|-|
 |[53deb39](https://github.com/Guillaume-Docquier/trains/commit/53deb39f9433c2bf6a989d448342b66c939b90d1)|-|-|-|-|-|
 |[4e38515](https://github.com/Guillaume-Docquier/trains/commit/4e38515c1960cdc8c52431ede1f4d8cbfe9f161d)|-|-|-|-|-|
+|Heuristic|00:00:00|31|123|-|D,1,0;D,4,0;G,1,2;C,1,4;D,1,0;CG,4,1;D,4,0;GA,4,1;D,4,0;C,3,4;D,3,0;GA,3,4;D,3,0;GA,3,4;D,3,0;AA,5,3;D,5,0;GA,5,3;D,5,0;CG,5,3;D,5,0;ACG,6,5;D,6,0;CG,6,5;D,6,0;EG,6,5;D,6,0;GAC,2,6;CAC,2,6;CG,2,6;D,2,0|

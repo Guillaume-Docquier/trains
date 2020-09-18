@@ -107,7 +107,7 @@ namespace Trains.Tests
         }
 
         [TestCaseSource(nameof(TestEachNewMethodEstimatesAMoreAccurateCostTestCases))]
-        public void Test_Each_New_Method_Estimates_A_More_Accurate_Cost_Without_Overestimating(State state)
+        public void Test_Each_New_Method_Estimates_A_Higher_Cost_That_Is_Lower_Than_Than_The_Heuristic_Solution_Cost(State state)
         {
             var cost1 = PotentialCostWithMinimalMoves(state);
             var cost2 = PotentialCostWithMinimalMovesAndMinimalDistance(state);
@@ -117,6 +117,79 @@ namespace Trains.Tests
             Assert.GreaterOrEqual(cost2, cost1);
             Assert.GreaterOrEqual(cost3, cost2);
             Assert.GreaterOrEqual(cost4, cost3);
+        }
+        
+        public static IEnumerable<TestCaseData> PotentialEvaluationDoesNotOverestimateTheBestSolutionTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(
+                    new State
+                    {
+                        TrainLines = new[]
+                        {
+                            "0000AGCAG",
+                            "00DCACGDG",
+                            "000000DCG",
+                        },
+                        Destination = 'C',
+                        Solution = new Solution("")
+                    },
+                    16);
+                yield return new TestCaseData(
+                    new State
+                    {
+                        TrainLines = new[]
+                        {
+                            "0000AGCAG",
+                            "00DCACGDG",
+                            "0000BCDCG",
+                        },
+                        Destination = 'C',
+                        Solution = new Solution("")
+                    },
+                    21);
+                yield return new TestCaseData(
+                    new State
+                    {
+                        TrainLines = new[]
+                        {
+                            "00000DGCDG",
+                            "0000ACCACC",
+                            "000CDGADGA",
+                            "000DGDGADG",
+                            "0000AADGAD",
+                            "000ACGDCGD",
+                        },
+                        Destination = 'A',
+                        Solution = new Solution("")
+                    },
+                    34);
+                yield return new TestCaseData(
+                    new State
+                    {
+                        TrainLines = new[]
+                        {
+                            "00DGCDGEFA",
+                            "0ACCACCGDE",
+                            "CDGADGADEE",
+                            "DGDGADGCAA",
+                            "0AADGADCGD",
+                            "ACGDCGDEGD",
+                        },
+                        Destination = 'D',
+                        Solution = new Solution("")
+                    },
+                    78);
+            }
+        }
+
+        [TestCaseSource(nameof(PotentialEvaluationDoesNotOverestimateTheBestSolutionTestCases))]
+        public void Potential_Evaluation_Does_Not_Overestimate_The_Best_Solution(State state, int trueCost)
+        {
+            var potentialCost = PotentialCostWithMinimalMovesAndMinimalDistanceWithRealisticEvaluation(state);
+
+            Assert.GreaterOrEqual(trueCost, potentialCost);
         }
 
         private int PotentialCostWithMinimalMoves(State state)
